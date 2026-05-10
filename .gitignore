@@ -67,3 +67,14 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# Build directories
+build/
+build-*/
+
+# Qt Creator user files
+CMakeLists.txt.user
+CMakeLists.txt.user.*
+
+# macOS
+.DS_Store
