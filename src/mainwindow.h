@@ -1,5 +1,5 @@
-#ifndef _HOBO_GIS_MAINWINDOW_H_
-#define _HOBO_GIS_MAINWINDOW_H_
+#ifndef HOBO_GIS_MAINWINDOW_H
+#define HOBO_GIS_MAINWINDOW_H
 
 #include <QMainWindow>
 
@@ -12,4 +12,4 @@ public:
     ~MainWindow() override;
 };
 
-#endif // _HOBO_GIS_MAINWINDOW_H_
+#endif // HOBO_GIS_MAINWINDOW_H

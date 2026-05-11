@@ -17,6 +17,8 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 add_executable(hobo-gis 
     src/main.cpp
+    src/mainwindow.cpp
+    src/mainwindow.h
 )
 
 target_link_libraries(hobo-gis PRIVATE Qt6::Widgets)
