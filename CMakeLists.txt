@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.21)
 
 project(hobo-gis VERSION 1.0.0 LANGUAGES CXX)
 
@@ -15,15 +15,27 @@ set(CMAKE_AUTOUIC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
+qt_standard_project_setup()
+
 add_executable(hobo-gis 
     src/main.cpp
     src/mainwindow.cpp
     src/mainwindow.h
 )
 
-target_link_libraries(hobo-gis PRIVATE Qt6::Widgets)
-
-# Strict warnings to catch mistakes while learning
-target_compile_options(hobo-gis PRIVATE
-    -Wall -Wextra -Wpedantic
+target_link_libraries(hobo-gis
+    PRIVATE
+        Qt6::Widgets
 )
+
+target_compile_features(hobo-gis
+    PRIVATE
+        cxx_std_20
+)
+
+if(MSVC)
+    target_compile_options(hobo-gis PRIVATE /W4 /permissive-)
+else()
+    target_compile_options(hobo-gis PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+
