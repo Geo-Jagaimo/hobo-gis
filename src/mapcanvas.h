@@ -9,6 +9,9 @@ class MapCanvas : public QGraphicsView
 public:
     explicit MapCanvas(QWidget *parent = nullptr);
     ~MapCanvas() override;
+
+protected:
+    void wheelEvent(QWheelEvent *event) override;
 };
 
 #endif // HOBO_GIS_MAPCANVAS_H
