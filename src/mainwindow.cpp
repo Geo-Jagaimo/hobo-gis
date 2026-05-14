@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), mCanvas(new MapCa
     setCentralWidget(mCanvas);
 
     // メニューバー
+    menuBar()->setNativeMenuBar(false); // macOS
     menuBar()->addMenu("&File");
     menuBar()->addMenu("&View");
 
