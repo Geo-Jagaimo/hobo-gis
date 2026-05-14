@@ -4,8 +4,7 @@
 #include <QMenuBar>
 #include <QStatusBar>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
-                                          mCanvas(new MapCanvas(this))
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), mCanvas(new MapCanvas(this))
 {
     setWindowTitle("hobo-gis");
     resize(800, 600);

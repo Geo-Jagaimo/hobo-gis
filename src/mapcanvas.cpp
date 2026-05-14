@@ -25,3 +25,5 @@ MapCanvas::MapCanvas(QWidget *parent) : QGraphicsView(parent)
     // マウスドラッグでシーンをパン
     setDragMode(QGraphicsView::ScrollHandDrag);
 }
+
+MapCanvas::~MapCanvas() = default;
