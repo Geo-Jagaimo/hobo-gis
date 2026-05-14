@@ -2,6 +2,7 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 #include <QPixmap>
 #include <QWheelEvent>
 #include <QDebug>
@@ -33,6 +34,8 @@ void MapCanvas::loadImage(const QString &filePath)
     mPixmapItem = nullptr; // clear()で削除されたので参照クリア
 
     mPixmapItem = scene()->addPixmap(pixmap);
+    mPixmapItem->setFlag(QGraphicsItem::ItemIsMovable, true);
+    mPixmapItem->setFlag(QGraphicsItem::ItemIsSelectable, true);
 
     scene()->setSceneRect(pixmap.rect()); // シーン範囲を画像に合わせる
 
