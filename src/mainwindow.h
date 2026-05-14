@@ -13,6 +13,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+private slots:
+    void openImage();
+
 private:
     MapCanvas *mCanvas;
 };

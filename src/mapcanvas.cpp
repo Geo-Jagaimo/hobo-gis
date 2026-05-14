@@ -1,9 +1,10 @@
 #include "mapcanvas.h"
 
 #include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
+#include <QPixmap>
 #include <QWheelEvent>
-#include <QPen>
-#include <QBrush>
+#include <QDebug>
 
 MapCanvas::MapCanvas(QWidget *parent) : QGraphicsView(parent)
 {
@@ -11,22 +12,32 @@ MapCanvas::MapCanvas(QWidget *parent) : QGraphicsView(parent)
     auto *scene = new QGraphicsScene(this);
     setScene(scene);
 
-    // シーンの範囲を定義
-    // x, y, width, height
-    scene->setSceneRect(-500, -500, 1000, 1000);
-
-    // 動作確認用の矩形
-    scene->addRect(-100, -100, 200, 200, QPen(Qt::blue, 2), QBrush(Qt::lightGray));
-
-    // アンチエイリアス有効化
-    setRenderHint(QPainter::Antialiasing);
-    // マウスドラッグでシーンをパン
+    setRenderHint(QPainter::Antialiasing);          // アンチエイリアス有効化
+    setRenderHint(QPainter::SmoothPixmapTransform); // 拡大時の画像補間
     setDragMode(QGraphicsView::ScrollHandDrag);
-    // ズームの中心をマウス位置にする
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 }
 
 MapCanvas::~MapCanvas() = default;
+
+void MapCanvas::loadImage(const QString &filePath)
+{
+    QPixmap pixmap(filePath);
+    if (pixmap.isNull())
+    {
+        qWarning() << "Failed to load image:" << filePath;
+        return;
+    }
+
+    scene()->clear();
+    mPixmapItem = nullptr; // clear()で削除されたので参照クリア
+
+    mPixmapItem = scene()->addPixmap(pixmap);
+
+    scene()->setSceneRect(pixmap.rect()); // シーン範囲を画像に合わせる
+
+    fitInView(mPixmapItem, Qt::KeepAspectRatio);
+}
 
 void MapCanvas::wheelEvent(QWheelEvent *event)
 {
