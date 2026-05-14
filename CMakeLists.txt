@@ -18,7 +18,11 @@ find_package(GDAL REQUIRED)
 
 qt_standard_project_setup()
 
-add_executable(hobo-gis 
+set(APP_ICON ${CMAKE_SOURCE_DIR}/hobogis.icns)
+set_source_files_properties(${APP_ICON} PROPERTIES
+    MACOSX_PACKAGE_LOCATION "Resources")
+
+add_executable(hobo-gis MACOSX_BUNDLE
     src/main.cpp
     src/mainwindow.cpp
     src/mainwindow.h
@@ -28,6 +32,16 @@ add_executable(hobo-gis
     src/rasterlayer.h
     src/layerpanel.cpp
     src/layerpanel.h
+    ${APP_ICON}
+)
+
+set_target_properties(hobo-gis PROPERTIES
+    MACOSX_BUNDLE_ICON_FILE "hobogis.icns"
+    MACOSX_BUNDLE_BUNDLE_NAME "hobo-gis"
+    MACOSX_BUNDLE_BUNDLE_VERSION "1.0.0"
+    MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+    MACOSX_BUNDLE_GUI_IDENTIFIER "com.example.hobogis"
+    MACOSX_BUNDLE_COPYRIGHT "© 2026 Geo-Jagaimo"
 )
 
 target_link_libraries(hobo-gis
@@ -46,4 +60,3 @@ if(MSVC)
 else()
     target_compile_options(hobo-gis PRIVATE -Wall -Wextra -Wpedantic)
 endif()
-
