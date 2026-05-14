@@ -1,6 +1,9 @@
 {
   "cmake.buildDirectory": "${workspaceFolder}/build",
   "cmake.configureOnOpen": true,
+  // "cmake.configureSettings": {
+    // "CMAKE_PREFIX_PATH": "/opt/homebrew/opt/qt"
+  // },
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
   "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
   "C_Cpp.default.cppStandard": "c++20"

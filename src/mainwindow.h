@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class MapCanvas; // 前方宣言：classがあることを教える
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -10,6 +12,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
+
+private:
+    MapCanvas *mCanvas;
 };
 
 #endif // HOBO_GIS_MAINWINDOW_H

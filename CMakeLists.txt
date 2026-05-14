@@ -21,6 +21,8 @@ add_executable(hobo-gis
     src/main.cpp
     src/mainwindow.cpp
     src/mainwindow.h
+    src/mapcanvas.h
+    src/mapcanvas.cpp
 )
 
 target_link_libraries(hobo-gis
