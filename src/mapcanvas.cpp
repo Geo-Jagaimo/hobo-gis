@@ -1,11 +1,9 @@
 #include "mapcanvas.h"
+#include "rasterlayer.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
-#include <QGraphicsItem>
-#include <QPixmap>
 #include <QWheelEvent>
-#include <QDebug>
 
 MapCanvas::MapCanvas(QWidget *parent) : QGraphicsView(parent)
 {
@@ -21,25 +19,26 @@ MapCanvas::MapCanvas(QWidget *parent) : QGraphicsView(parent)
 
 MapCanvas::~MapCanvas() = default;
 
-void MapCanvas::loadImage(const QString &filePath)
+void MapCanvas::addRasterLayer(const QString &filePath)
 {
-    QPixmap pixmap(filePath);
-    if (pixmap.isNull())
+    auto *layer = new RasterLayer(filePath, this);
+    if (!layer->isValid())
     {
-        qWarning() << "Failed to load image:" << filePath;
+        delete layer;
         return;
     }
 
-    scene()->clear();
-    mPixmapItem = nullptr; // clear()で削除されたので参照クリア
+    mLayers.append(layer);
+    scene()->addItem(layer->graphicsItem());
 
-    mPixmapItem = scene()->addPixmap(pixmap);
-    mPixmapItem->setFlag(QGraphicsItem::ItemIsMovable, true);
-    mPixmapItem->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    // 1枚目の画像であれば、シーンの範囲とビューを画像に合わせる
+    if (mLayers.size() == 1)
+    {
+        scene()->setSceneRect(layer->graphicsItem()->boundingRect());
+        fitInView(layer->graphicsItem(), Qt::KeepAspectRatio);
+    }
 
-    scene()->setSceneRect(pixmap.rect()); // シーン範囲を画像に合わせる
-
-    fitInView(mPixmapItem, Qt::KeepAspectRatio);
+    emit layersChanged();
 }
 
 void MapCanvas::wheelEvent(QWheelEvent *event)

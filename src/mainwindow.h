@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 class MapCanvas; // 前方宣言：classがあることを教える
+class LayerPanel;
 
 class MainWindow : public QMainWindow
 {
@@ -18,6 +19,7 @@ private slots:
 
 private:
     MapCanvas *mCanvas;
+    LayerPanel *mLayerPanel;
 };
 
 #endif // HOBO_GIS_MAINWINDOW_H

@@ -1,19 +1,23 @@
 #include "mainwindow.h"
 #include "mapcanvas.h"
+#include "layerpanel.h"
 
 #include <QMenuBar>
 #include <QStatusBar>
 #include <QFileDialog>
-#include <QGraphicsScene>
 #include <QMenu>
-#include <QPixmap>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), mCanvas(new MapCanvas(this))
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
+                                          mCanvas(new MapCanvas(this)),
+                                          mLayerPanel(new LayerPanel(mCanvas, this))
 {
     setWindowTitle("hobo-gis");
     resize(800, 600);
     // 中央ウィジェットとしてキャンバスを表示
     setCentralWidget(mCanvas);
+
+    // レイヤパネル
+    addDockWidget(Qt::LeftDockWidgetArea, mLayerPanel);
 
     // メニューバー
     menuBar()->setNativeMenuBar(false); // macOS
@@ -21,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), mCanvas(new MapCa
     fileMenu->addAction(tr("&Open Image..."), this, &MainWindow::openImage);
     fileMenu->addAction(tr("&Quit"), this, &QWidget::close);
 
-    menuBar()->addMenu(tr("&View"));
+    QMenu *viewMenu = menuBar()->addMenu(tr("&View"));
+    viewMenu->addAction(mLayerPanel->toggleViewAction());
 
     // ステータスバー
     statusBar()->showMessage("Ready");
@@ -42,6 +47,6 @@ void MainWindow::openImage()
         return;
     }
 
-    mCanvas->loadImage(filePath);
-    statusBar()->showMessage(tr("Loaded: %1").arg(filePath), 5000);
+    mCanvas->addRasterLayer(filePath);
+    statusBar()->showMessage(tr("Added: %1").arg(filePath), 5000);
 }

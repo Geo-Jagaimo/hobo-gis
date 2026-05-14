@@ -21,8 +21,12 @@ add_executable(hobo-gis
     src/main.cpp
     src/mainwindow.cpp
     src/mainwindow.h
-    src/mapcanvas.h
     src/mapcanvas.cpp
+    src/mapcanvas.h
+    src/rasterlayer.cpp
+    src/rasterlayer.h
+    src/layerpanel.cpp
+    src/layerpanel.h
 )
 
 target_link_libraries(hobo-gis
