@@ -14,6 +14,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(GDAL REQUIRED)
 
 qt_standard_project_setup()
 
@@ -32,6 +33,7 @@ add_executable(hobo-gis
 target_link_libraries(hobo-gis
     PRIVATE
         Qt6::Widgets
+        GDAL::GDAL
 )
 
 target_compile_features(hobo-gis

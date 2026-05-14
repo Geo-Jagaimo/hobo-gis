@@ -6,6 +6,7 @@
 #include <QStatusBar>
 #include <QFileDialog>
 #include <QMenu>
+#include <gdal.h>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
                                           mCanvas(new MapCanvas(this)),
@@ -28,8 +29,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     QMenu *viewMenu = menuBar()->addMenu(tr("&View"));
     viewMenu->addAction(mLayerPanel->toggleViewAction());
 
-    // ステータスバー
-    statusBar()->showMessage("Ready");
+    // ステータスバーにGDALバージョンを表示
+    GDALAllRegister();
+    const QString gdalVersion = QString::fromUtf8(GDALVersionInfo("RELEASE_NAME"));
+    statusBar()->showMessage(tr("Ready  |  GDAL %1").arg(gdalVersion));
 }
 
 MainWindow::~MainWindow() = default;
