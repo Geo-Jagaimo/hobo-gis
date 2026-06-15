@@ -11,4 +11,4 @@ ninja
 
 ## Features
 
-[ ]
+[ ] Suppot GeoTIFF
