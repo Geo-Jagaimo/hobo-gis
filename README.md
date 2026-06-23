@@ -12,3 +12,4 @@ ninja
 ## Features
 
 - [ ] Suppot GeoTIFF
+- [ ] Support CRS
