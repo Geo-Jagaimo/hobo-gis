@@ -8,8 +8,3 @@ mkdir build && cd build
 cmake -G Ninja -DCMAKE_PREFIX_PATH=$(brew --prefix qt) ..
 ninja
 ```
-
-## Features
-
-- [ ] Suppot GeoTIFF
-- [ ] Support CRS
