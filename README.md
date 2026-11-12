@@ -4,21 +4,21 @@ Qt and C++ application to learn how QGIS works.
 
 ## Development Setup (macOS)
 
-### Xcode Command Line Tools
+1. Xcode Command Line Tools
 
-```sh
-xcode-select --install
-```
+    ```sh
+    xcode-select --install
+    ```
 
-### Build tools & libraries
+2. Build tools & libraries
 
-```sh
-brew install cmake ninja qt gdal pipx
-```
+    ```sh
+    brew install cmake ninja qt gdal pipx
+    ```
 
-### clang-format
+3. clang-format
 
-```sh
-pipx ensurepath     # open a new terminal afterwards
-pipx install clang-format==21.1.8
-```
+    ```sh
+    pipx ensurepath     # open a new terminal afterwards
+    pipx install clang-format==21.1.8
+    ```
