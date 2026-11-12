@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(hobo-gis VERSION 1.0.0 LANGUAGE CXX)
+project(hobo-gis VERSION 1.0.0 LANGUAGES CXX)
 
 # 以下は QGIS の　CMakeLists.txt と同じ設定
 set(CMAKE_CXX_STANDARD 20)
